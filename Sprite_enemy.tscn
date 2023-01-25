@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprite_enemy.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://fontRes/Freedynamicfont.tres" type="DynamicFont" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.894118, 0.592157, 0.32549, 1 )
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 240.008
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 39.6232
+
+[node name="Enemy" type="KinematicBody2D" groups=["enemy"]]
+script = ExtResource( 1 )
+speed = 10
+HP = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.780392, 0.266667, 0.870588, 1 )
+texture = ExtResource( 2 )
+
+[node name="Label_msg" type="Label" parent="."]
+margin_left = -35.0
+margin_top = -75.0
+margin_right = 31.0
+margin_bottom = -37.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = SubResource( 2 )
+text = "干他"
+
+[node name="Area2D_checkFriend" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_checkFriend"]
+shape = SubResource( 3 )
+
+[node name="Label_Infomation" type="Label" parent="."]
+visible = false
+margin_left = -22.0
+margin_top = 42.0
+margin_right = 92.0
+margin_bottom = 110.0
+
+[node name="ProgressBar_HP" type="ProgressBar" parent="."]
+margin_left = -66.0
+margin_top = 42.0
+margin_right = 64.0
+margin_bottom = 56.0
+max_value = 500.0
+
+[node name="Area2D_click" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_click"]
+shape = SubResource( 4 )
+
+[node name="Panel_trainningBtn" type="Panel" parent="."]
+visible = false
+margin_right = 102.0
+margin_bottom = 127.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel_trainningBtn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -58.0
+
+[node name="Button_fight" type="Button" parent="Panel_trainningBtn/VBoxContainer"]
+margin_right = 102.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 3 )
+text = "干他"
+
+[node name="Button_run" type="Button" parent="Panel_trainningBtn/VBoxContainer"]
+margin_top = 42.0
+margin_right = 102.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 3 )
+text = "快跑"
+
+[node name="Button_save" type="Button" parent="Panel_trainningBtn/VBoxContainer"]
+margin_top = 84.0
+margin_right = 102.0
+margin_bottom = 122.0
+custom_fonts/font = ExtResource( 3 )
+text = "保存"
+
+[connection signal="body_entered" from="Area2D_checkFriend" to="." method="_on_Area2D_checkFriend_body_entered"]
+[connection signal="body_exited" from="Area2D_checkFriend" to="." method="_on_Area2D_checkFriend_body_exited"]
+[connection signal="mouse_entered" from="Area2D_click" to="." method="_on_Area2D_click_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D_click" to="." method="_on_Area2D_click_mouse_exited"]
+[connection signal="pressed" from="Panel_trainningBtn/VBoxContainer/Button_fight" to="." method="_on_Button_fight_pressed"]
+[connection signal="pressed" from="Panel_trainningBtn/VBoxContainer/Button_run" to="." method="_on_Button_run_pressed"]
+[connection signal="pressed" from="Panel_trainningBtn/VBoxContainer/Button_save" to="." method="_on_Button_save_pressed"]

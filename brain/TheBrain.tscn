@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://brain/TheBrain.gd" type="Script" id=1]
+
+[node name="TheBrain" type="Node" groups=["AIBrain"]]
+script = ExtResource( 1 )
